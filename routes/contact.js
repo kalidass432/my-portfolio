@@ -1,11 +1,16 @@
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
-
+const Message = require("../models/Message");
 
 router.post("/", async (req, res) =>{
     try {
         const { name, email,subject, message} = req.body;
         console.log("📥 Form received:", req.body);
+
+        // Save to Mongodb
+        const newMessage = new Message({ name, email, subject, message });
+        await newMessage.save();
+        
 
         // Send email notification
         const transporter = nodemailer.createTransport({
@@ -15,7 +20,6 @@ router.post("/", async (req, res) =>{
                 pass: process.env.EMAIL_PASS,
             },
         });
-        
           await transporter.sendMail({
             from: email,
             to: process.env.EMAIL_USER,
