@@ -2,7 +2,7 @@ const router = require("express").Router();
 const nodemailer = require("nodemailer");
 const Message = require("../models/Message");
 
-router.post("/", async (req, res) =>{
+router.post("/api/contact", async (req, res) =>{
     try {
         const { name, email,subject, message} = req.body;
         console.log("📥 Form received:", req.body);
