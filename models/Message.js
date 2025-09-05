@@ -6,6 +6,6 @@ const messageSchema = new mongoose.Schema({
     subject: {type: String,},
     message: {type: String, required: true},
     date: {type: Date, default: Date.now},
-},{collection: "port"});
+});
 
 module.exports = mongoose.model("Message", messageSchema);
