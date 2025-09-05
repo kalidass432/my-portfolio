@@ -8,7 +8,10 @@ const contactRoutes= require("./routes/contact");
 dotenv.config();
  const app= express();
   app.use(express.json());
-  app.use(cors());
+  app.use(cors({
+     origin: "https://kalidass-portfolio.vercel.app", // only allow your frontend
+  methods: ["GET", "POST"]
+  }));
 
   //Routers
   app.use('/api/contact', contactRoutes);
